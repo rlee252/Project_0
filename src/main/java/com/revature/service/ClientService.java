@@ -3,16 +3,16 @@ package com.revature.service;
 import java.util.List;
 
 import com.revature.dao.ClientDAO;
-import com.revature.exceptions.ClientCreationException;
+import com.revature.exceptions.BadParameterException;
+
 import com.revature.exceptions.ClientNotFoundException;
 import com.revature.exceptions.DatabaseException;
 import com.revature.model.Client;
 
 public class ClientService {
-	//ClientDAO is a dependency of ClientService
+	
 	private ClientDAO clientDAO;
 	
-	//creates a new ClientDAO object
 	public ClientService() {
 		this.clientDAO = new ClientDAO();
 	}
@@ -27,8 +27,13 @@ public class ClientService {
 		return clientDAO.getClients();
 	}
 	//Exception Mapping Exception Handler
-	public Client getClientById(int id) throws ClientNotFoundException, DatabaseException {
-		return clientDAO.getClientsById(id);
+	public Client getClientById(String stringId) throws ClientNotFoundException, DatabaseException, BadParameterException {
+		try {
+				int id = Integer.parseInt(stringId);
+				return clientDAO.getClientsById(id);
+		} catch (NumberFormatException e) {
+			throw new BadParameterException("Pirate id must be an int. User provided " + stringId);
+		}
 	}
 	public Client addClient(Client client) throws DatabaseException {
 		return clientDAO.addClient(client);

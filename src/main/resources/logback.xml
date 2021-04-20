@@ -1,0 +1,26 @@
+<configuration>
+	<!-- class ch.qos.Logback.core.ConsoleAppender is from the logback core 
+		dependency -->
+	<appender name="myConsoleAppender"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="myFileAppender"
+		class="ch.qos.logback.core.FileAppender">
+		<file>application.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="myConsoleAppender" />
+		<appender-ref ref="myFileAppender" />
+	</root>
+</configuration>

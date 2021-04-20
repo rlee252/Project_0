@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.exceptions.ClientCreationException;
 import com.revature.exceptions.ClientNotFoundException;
 import com.revature.exceptions.DatabaseException;
 import com.revature.model.Client;
@@ -63,7 +62,7 @@ public class ClientDAO {
 				
 				return new Client(clientId, firstName, lastName, age);
 			}
-		} catch (SQLException e) {
+		}   catch (SQLException e) {
 		
 			throw new DatabaseException("Something happened with the database. Exception message is: " + e.getMessage());
 		}
